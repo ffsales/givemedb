@@ -22,7 +22,7 @@ func main() {
 
 	// CreateContainer()
 
-	CreatePostgre(cli)
+	CreateMysql(cli)
 
 	ListContainers(cli)
 
@@ -82,7 +82,7 @@ func CreateContainer(cli *client.Client) {
 
 }
 
-func CreatePostgre(cli *client.Client) {
+func CreateMysql(cli *client.Client) {
 	ctx := context.Background()
 
 	reader, err := cli.ImagePull(ctx, "docker.io/library/mysql", image.PullOptions{})
