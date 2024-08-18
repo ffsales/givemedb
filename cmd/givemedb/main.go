@@ -22,7 +22,7 @@ func main() {
 
 	// CreateContainer()
 
-	CreateMysql(cli)
+	// CreateMysql(cli)
 
 	ListContainers(cli)
 
@@ -31,7 +31,7 @@ func main() {
 func ListContainers(cli *client.Client) {
 	defer cli.Close()
 
-	containers, err := cli.ContainerList(context.Background(), container.ListOptions{})
+	containers, err := cli.ContainerList(context.Background(), container.ListOptions{All: true})
 	if err != nil {
 		panic(err)
 	}
