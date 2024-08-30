@@ -7,6 +7,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	ContainerName string
+	UserPass      string
+	DbName        string
+	RootPass      string
+	UserName      string
+)
+
 // givemeCmd represents the giveme command
 var givemeCmd = &cobra.Command{
 	Use:   "giveme",
@@ -27,6 +35,22 @@ This application was build using Cobra framework.`,
 }
 
 func init() {
+
+	givemeCmd.PersistentFlags().StringVarP(&ContainerName, "container-name", "c", "", "Container's name")
+	givemeCmd.MarkPersistentFlagRequired("container-name")
+
+	givemeCmd.PersistentFlags().StringVarP(&DbName, "db-name", "d", "", "Database's name")
+	givemeCmd.MarkPersistentFlagRequired("db-name")
+
+	givemeCmd.PersistentFlags().StringVarP(&RootPass, "root-pass", "r", "", "User Root's password")
+	givemeCmd.MarkPersistentFlagRequired("root-pass")
+
+	givemeCmd.PersistentFlags().StringVarP(&UserPass, "user-pass", "p", "", "User's password")
+	givemeCmd.MarkPersistentFlagRequired("user-pass")
+
+	givemeCmd.PersistentFlags().StringVarP(&UserName, "user-name", "u", "", "UserName")
+	givemeCmd.MarkPersistentFlagRequired("user-name")
+
 	rootCmd.AddCommand(givemeCmd)
 
 	// Here you will define your flags and configuration settings.
