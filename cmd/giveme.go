@@ -7,7 +7,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// givemeCmd represents the giveme command
+var (
+	ContainerName string
+	DatabaseName  string
+)
+
 var givemeCmd = &cobra.Command{
 	Use:   "giveme",
 	Short: "Create a container of DB of type MySQL or Postgres",
@@ -27,15 +31,12 @@ This application was build using Cobra framework.`,
 }
 
 func init() {
+
+	givemeCmd.PersistentFlags().StringVarP(&ContainerName, "container-name", "c", "", "Container's name")
+	givemeCmd.MarkPersistentFlagRequired("container-name")
+
+	givemeCmd.PersistentFlags().StringVarP(&DbName, "db-name", "d", "", "Database's name")
+	givemeCmd.MarkPersistentFlagRequired("db-name")
+
 	rootCmd.AddCommand(givemeCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// givemeCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// givemeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
