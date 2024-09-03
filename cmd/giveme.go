@@ -9,13 +9,9 @@ import (
 
 var (
 	ContainerName string
-	UserPass      string
-	DbName        string
-	RootPass      string
-	UserName      string
+	DatabaseName  string
 )
 
-// givemeCmd represents the giveme command
 var givemeCmd = &cobra.Command{
 	Use:   "giveme",
 	Short: "Create a container of DB of type MySQL or Postgres",
@@ -42,24 +38,5 @@ func init() {
 	givemeCmd.PersistentFlags().StringVarP(&DbName, "db-name", "d", "", "Database's name")
 	givemeCmd.MarkPersistentFlagRequired("db-name")
 
-	givemeCmd.PersistentFlags().StringVarP(&RootPass, "root-pass", "r", "", "User Root's password")
-	givemeCmd.MarkPersistentFlagRequired("root-pass")
-
-	givemeCmd.PersistentFlags().StringVarP(&UserPass, "user-pass", "p", "", "User's password")
-	givemeCmd.MarkPersistentFlagRequired("user-pass")
-
-	givemeCmd.PersistentFlags().StringVarP(&UserName, "user-name", "u", "", "UserName")
-	givemeCmd.MarkPersistentFlagRequired("user-name")
-
 	rootCmd.AddCommand(givemeCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// givemeCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// givemeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

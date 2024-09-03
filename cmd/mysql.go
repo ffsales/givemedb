@@ -12,6 +12,13 @@ import (
 	"github.com/spf13/pflag"
 )
 
+var (
+	UserPass string
+	DbName   string
+	RootPass string
+	UserName string
+)
+
 type MysqlParam struct {
 	ContainerName string
 	DatabaseName  string
@@ -20,7 +27,6 @@ type MysqlParam struct {
 	UserPass      string
 }
 
-// mysqlCmd represents the mysql command
 var mysqlCmd = &cobra.Command{
 	Use:   "mysql",
 	Short: "Set o MySql how DB to be created",
@@ -39,17 +45,17 @@ var mysqlCmd = &cobra.Command{
 }
 
 func init() {
+
+	mysqlCmd.PersistentFlags().StringVarP(&RootPass, "root-pass", "r", "", "User Root's password")
+	mysqlCmd.MarkPersistentFlagRequired("root-pass")
+
+	mysqlCmd.PersistentFlags().StringVarP(&UserPass, "user-pass", "p", "", "User's password")
+	mysqlCmd.MarkPersistentFlagRequired("user-pass")
+
+	mysqlCmd.PersistentFlags().StringVarP(&UserName, "user-name", "u", "", "UserName")
+	mysqlCmd.MarkPersistentFlagRequired("user-name")
+
 	givemeCmd.AddCommand(mysqlCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// mysqlCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// mysqlCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func getParameters(flags *pflag.FlagSet) (MysqlParam, error) {
